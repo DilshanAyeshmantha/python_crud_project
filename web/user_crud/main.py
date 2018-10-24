@@ -7,7 +7,7 @@ from werkzeug import generate_password_hash, check_password_hash
 
 @app.route('/new_user')
 def add_user_view():
-	return render_template('templates/add.html')
+	return render_template('add.html')
 		
 @app.route('/add', methods=['POST'])
 def add_user():
@@ -32,9 +32,9 @@ def add_user():
 			return 'Error while adding user'
 	except Exception as e:
 		print(e)
-	finally:
-		cursor.close() 
-		conn.close()
+	#finally:
+	#	cursor.close() 
+	#	conn.close()
 		
 @app.route('/')
 def users():
@@ -45,12 +45,12 @@ def users():
 		rows = cursor.fetchall()
 		table = Results(rows)
 		table.border = True
-		return render_template('templates/users.html', table=table)
+		return render_template('users.html', table=table)
 	except Exception as e:
 		print(e)
-	finally:
-		cursor.close() 
-		conn.close()
+	#finally:
+	#	cursor.close() 
+	#	conn.close()
 
 @app.route('/edit/<int:id>')
 def edit_view(id):
@@ -60,14 +60,14 @@ def edit_view(id):
 		cursor.execute("SELECT * FROM tbl_user WHERE user_id=%s", id)
 		row = cursor.fetchone()
 		if row:
-			return render_template('templates/edit.html', row=row)
+			return render_template('edit.html', row=row)
 		else:
 			return 'Error loading #{id}'.format(id=id)
 	except Exception as e:
 		print(e)
-	finally:
-		cursor.close()
-		conn.close()
+	#finally:
+	#	cursor.close()
+	#	conn.close()
 
 @app.route('/update', methods=['POST'])
 def update_user():
@@ -93,9 +93,9 @@ def update_user():
 			return 'Error while updating user'
 	except Exception as e:
 		print(e)
-	finally:
-		cursor.close() 
-		conn.close()
+	#finally:
+	#	cursor.close() 
+	#	conn.close()
 		
 @app.route('/delete/<int:id>')
 def delete_user(id):
@@ -108,9 +108,9 @@ def delete_user(id):
 		return redirect('/')
 	except Exception as e:
 		print(e)
-	finally:
-		cursor.close() 
-		conn.close()
+	#finally:
+	#	cursor.close() 
+	#	conn.close()
 		
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run()
