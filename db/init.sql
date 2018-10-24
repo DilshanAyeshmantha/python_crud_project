@@ -1,3 +1,6 @@
+CREATE DATABASE users;
+use users;
+
 CREATE TABLE tbl_user (
    user_id bigint(20) NOT NULL AUTO_INCREMENT,
    user_name varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
