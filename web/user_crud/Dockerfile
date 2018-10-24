@@ -4,8 +4,12 @@ EXPOSE 5000
 
 WORKDIR /app
 
-RUN pip install flask 
-RUN pip install mysql-connector
+RUN pip install flask \
+    mysql-connector \
+    pymysql \
+    flask_table \
+    flask-mysql \
+    Werkzeug
 
 COPY . /app
 
