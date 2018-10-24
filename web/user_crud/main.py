@@ -7,7 +7,7 @@ from werkzeug import generate_password_hash, check_password_hash
 
 @app.route('/new_user')
 def add_user_view():
-	return render_template('add.html')
+	return render_template('templates/add.html')
 		
 @app.route('/add', methods=['POST'])
 def add_user():
@@ -45,7 +45,7 @@ def users():
 		rows = cursor.fetchall()
 		table = Results(rows)
 		table.border = True
-		return render_template('users.html', table=table)
+		return render_template('templates/users.html', table=table)
 	except Exception as e:
 		print(e)
 	finally:
@@ -60,7 +60,7 @@ def edit_view(id):
 		cursor.execute("SELECT * FROM tbl_user WHERE user_id=%s", id)
 		row = cursor.fetchone()
 		if row:
-			return render_template('edit.html', row=row)
+			return render_template('templates/edit.html', row=row)
 		else:
 			return 'Error loading #{id}'.format(id=id)
 	except Exception as e:

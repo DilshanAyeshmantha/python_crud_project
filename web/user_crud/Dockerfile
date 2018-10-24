@@ -1,7 +1,5 @@
 FROM python:3.6
 
-EXPOSE 5000
-
 WORKDIR /app
 
 RUN pip install flask \
@@ -12,5 +10,7 @@ RUN pip install flask \
     Werkzeug
 
 COPY . /app
+
+EXPOSE 5000
 
 CMD python main.py
