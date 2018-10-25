@@ -12,11 +12,7 @@ def add_user_view():
 @app.route('/add', methods=['POST'])
 def add_user():
 	try:		
-		#_name = request.form['inputName']
-		#_email = request.form['inputEmail']
-		#_password = request.form['inputPassword']
 		# validate the received values
-		#if _name and _email and _password and request.method == 'POST':
 		if(request.method == 'POST'):
 			_name = request.form['inputName']
 			_email = request.form['inputEmail']
@@ -36,9 +32,9 @@ def add_user():
 			return 'Error while adding user'
 	except Exception as e:
 		print(e)
-	#finally:
-	#	cursor.close() 
-	#	conn.close()
+	finally:
+		cursor.close() 
+		conn.close()
 		
 @app.route('/')
 def users():
@@ -52,16 +48,16 @@ def users():
 		return render_template('users.html', table=table)
 	except Exception as e:
 		print(e)
-	#finally:
-	#	cursor.close() 
-	#	conn.close()
+	finally:
+		cursor.close() 
+		conn.close()
 
-@app.route('/edit/<int:id>')
+@app.route('/edit/<string:id>')
 def edit_view(id):
 	try:
 		conn = mysql.connect()
 		cursor = conn.cursor(pymysql.cursors.DictCursor)
-		cursor.execute("SELECT * FROM tbl_user WHERE user_id=%s", id)
+		cursor.execute("SELECT * FROM tbl_user WHERE user_id=%s", (id,))
 		row = cursor.fetchone()
 		if row:
 			return render_template('edit.html', row=row)
@@ -69,20 +65,20 @@ def edit_view(id):
 			return 'Error loading #{id}'.format(id=id)
 	except Exception as e:
 		print(e)
-	#finally:
-	#	cursor.close()
-	#	conn.close()
+	finally:
+		cursor.close()
+		conn.close()
 
 @app.route('/update', methods=['POST'])
 def update_user():
 	try:		
 		# validate the received values
 		if(request.method == 'POST'):
-			#do not save password as a plain text
 			_name = request.form['inputName']
 			_email = request.form['inputEmail']
 			_password = request.form['inputPassword']
 			_id = request.form['id']
+			# do not save password as a plain text
 			_hashed_password = generate_password_hash(_password)
 			# save edits
 			sql = "UPDATE tbl_user SET user_name=%s, user_email=%s, user_password=%s WHERE user_id=%s"
@@ -97,9 +93,9 @@ def update_user():
 			return 'Error while updating user'
 	except Exception as e:
 		print(e)
-	#finally:
-	#	cursor.close() 
-	#	conn.close()
+	finally:
+		cursor.close() 
+		conn.close()
 		
 @app.route('/delete/<string:id>')
 def delete_user(id):
@@ -112,9 +108,9 @@ def delete_user(id):
 		return redirect(url_for('users'))
 	except Exception as e:
 		print(e)
-	#finally:
-	#	cursor.close() 
-	#	conn.close()
+	finally:
+		cursor.close() 
+		conn.close()
 		
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)
