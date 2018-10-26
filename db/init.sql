@@ -29,6 +29,6 @@ insert  into tbl_user
     (1,'Dilshan Hangawaththa','dihalk@ifs.com','pbkdf2:sha256:50000$obX7AAZv$61ba4f743eff5113433a3fd249896deed4120e9a83deaf166477ca5fb74fcd49');
 
 insert into USER
-    (ID,FULL_NAME,USER_NAME)
+    (ID,FULL_NAME,USER_NAME,USER_PASSWORD)
 VALUES
-    (1,'Dilshan','Hangawaththa');
+    (1,'Dilshan','Hangawaththa','123');
