@@ -45,7 +45,7 @@
     "volumes": [
         {
             "host": {
-                "sourcePath": "/python_crud_project/db"
+                "sourcePath": "/db"
             },
             "name": "db"
         }
