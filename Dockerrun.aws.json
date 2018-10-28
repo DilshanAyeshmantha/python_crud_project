@@ -1,0 +1,53 @@
+{
+    "containerDefinitions": [
+        {
+            "essential": true,
+			"memory": 128,
+            "links": [
+                "db"
+            ],
+            "name": "app",
+			"image": "coolboynova/pythoncrudproject_app:1",
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000
+                }
+            ]
+        },
+        {
+            "environment": [
+                {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "root"
+                }
+            ],
+            "essential": true,
+			"memory": 128,
+            "mountPoints": [
+                {
+                    "containerPath": "/docker-entrypoint-initdb.d/",
+                    "sourceVolume": "db",
+					"readOnly": true
+                }
+            ],
+            "name": "db",
+			"image": "coolboynova/pythoncrudproject_db:1",
+            "portMappings": [
+                {
+                    "containerPort": 3306,
+                    "hostPort": 3306
+                }
+            ]
+        }
+    ],
+    "family": "",
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/python_crud_project/db"
+            },
+            "name": "db"
+        }
+    ]
+}
